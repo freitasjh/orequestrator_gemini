@@ -102,4 +102,4 @@ Para que isso rode liso no seu projeto:
 1.  **Escolha o seu Linter Primário:** (ex: Ruff para Python, ESLint para JS, ArchUnit para Java) e configure-o para exportar a saída em JSON.
 2.  **Instale o `jq`:** Se usar Linux/Mac, o utilitário `jq` é vital para os scripts bash parsearem os JSONs dos linters sem precisar de Python.
 3.  **Refatore os Hooks:** Aplique a lógica do `ERROR_COUNT` no seu `post-construction.sh`.
-4.  **Crie um "Contrato de QA":** Atualize o seu `SYSTEM_SPECIFICATION.md` informando aos agentes que *"Toda issue concluída DEVE ter um teste E2E ou de Integração cujo nome do arquivo contenha o número da Issue (ex: ISSUE_001_Test.ts)"*. O Quality Gate cuidará do resto.
+4.  **Crie um "Contrato de QA":** Atualize o seu `[[SYSTEM_SPECIFICATION]].md` informando aos agentes que *"Toda issue concluída DEVE ter um teste E2E ou de Integração cujo nome do arquivo contenha o número da Issue (ex: ISSUE_001_Test.ts)"*. O Quality Gate cuidará do resto.

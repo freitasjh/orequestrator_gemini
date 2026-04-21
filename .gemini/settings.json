@@ -1,4 +1,12 @@
 {
+  "mcp": {
+    "servers": {
+      "ObsidianBrain": {
+        "command": "node",
+        "args": ["/opt/systec/wsProjetos/orquestrator_gemini/scripts/tools/obsidian-mcp/build/index.js"]
+      }
+    }
+  },
   "hooks": {
     "BeforeAgent": [
       {

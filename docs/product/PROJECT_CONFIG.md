@@ -1,26 +1,27 @@
 # Configuração do Projeto (Bootstrap)
 
 ## 🛠 1. Stack Tecnológica
-- **Backend:** [Ex: Java 21, Python 3.11, Node.js 20]
-- **Frontend:** [Ex: React 18, Vue 3, Angular 17]
-- **Infra/DevOps:** [Ex: Docker, AWS, GitHub Actions, Vercel]
-- **Banco de Dados:** [Ex: PostgreSQL 16, MongoDB, MySQL]
+- **Orquestração:** Gemini CLI
+- **Cérebro Digital:** Obsidian MCP Server (Node.js 20+, TypeScript 5+)
+- **Automação:** Bash 5.0+, Python 3.11+ (Memory Tools)
+- **Infra/DevOps:** Docker, Git (Conventional Commits)
+- **Base de Conhecimento:** Markdown (Obsidian Vault)
 
 ## 🏗 2. Arquitetura Desejada
-- **Padrão:** [Ex: Modular Monolith, Microservices, MVC, Serverless]
-- **Princípios:** [Ex: DDD (Domain-Driven Design), SOLID, Clean Architecture]
-- **Estratégia de Dados:** [Ex: Schema-per-module, Single Database]
+- **Padrão:** Pipeline SDD (Process-Oriented / FSM)
+- **Princípios:** Spec-First, Multi-Agent System (MAS), Zero Trust Enforcement
+- **Estratégia de Dados:** File-based Knowledge (Markdown), SQLite para RAG local
 
 ## 🧪 3. Estratégia de Testes
-- **Níveis Exigidos:** [Ex: Unitários, Integração (Containers), E2E]
-- **Stack E2E:** [Ex: Playwright, Cypress]
-- **Cobertura Mínima:** [Ex: 80% das classes de Domínio e Fluxos Críticos E2E]
-- **Ferramentas:** [Ex: JUnit/Mockito, PyTest, Jest/React Testing Library, Playwright]
+- **Níveis Exigidos:** Testes de Integração de Hooks, Unitários para MCP Tools
+- **Stack:** Jest (Node.js), ShellSpec (Bash), PyTest (Python)
+- **Cobertura Mínima:** 80% nos scripts de automação e ferramentas críticas
 
 ## 🔗 4. Hooks de Automação e Validação
 - **Pre-Spec Hook:** bash scripts/hooks/pre-spec.sh
 - **Post-Construction Hook:** bash scripts/hooks/post-construction.sh
 - **Quality Gate Hook:** bash scripts/hooks/quality-gate.sh
+- **FSM Enforcer:** bash scripts/hooks/fsm-enforcer.sh
 
 ---
-*Status: [Aguardando Bootstrap]*
+*Status: [Bootstrap Concluído]*

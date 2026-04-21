@@ -18,9 +18,12 @@ Invoque o `@architect` para identificar o padrão de pastas (DDD, MVC, Clean Arc
    - **A Arquitetura:** O padrão detectado é intencional ou o projeto está em fase de refatoração para um novo padrão? Quais os princípios inegociáveis (ex: SOLID, DRY)?
    - **Estratégia de Testes:** O projeto exigirá **Testes de Integração**, **E2E** ou **somente Unitários**? Qual o nível de cobertura mínimo esperado? (Esta resposta ditará as regras do Orquestrador na Fase 5 e 6).
 
-4. **Escrita dos Documentos (Consolidação):**
-Somente após o desenvolvedor (humano) responder as perguntas e confirmar a direção, preencha o arquivo `docs/product/PROJECT_CONFIG.md` com as decisões consolidadas (incluindo a seção explícita de "Estratégia de Testes"). Atualize também o `docs/product/ARCHITECTURE.md` refletindo os padrões acordados.
+4. **Escrita dos Documentos e Ingestão no Cérebro (Consolidação):**
+Somente após o desenvolvedor (humano) responder as perguntas e confirmar a direção, realize as seguintes ações:
+   - Preencha o arquivo `docs/product/PROJECT_CONFIG.md` com as decisões consolidadas (incluindo a seção explícita de "Estratégia de Testes").
+   - Atualize o arquivo `docs/product/ARCHITECTURE.md` refletindo os padrões acordados.
+   - **Ingestão no Obsidian:** Utilize a ferramenta `ObsidianBrain.update_note` para salvar um resumo técnico da análise em `docs/product/PROJECT_ANALYSIS.md`. Se novos padrões ou dificuldades técnicas foram encontrados, registre-os também em `docs/LESSONS_LEARNED.md`.
 
 5. **Finalização:**
-Apresente o resumo consolidado do projeto e informe que o Orquestrador já tem todas as informações para iniciar o Pipeline SDD (Fase 1).
+Apresente o resumo consolidado do projeto, confirme que as informações foram salvas no seu "Cérebro Digital" (Obsidian) e informe que o Orquestrador já tem todas as informações para iniciar o Pipeline SDD (Fase 1).
 """

@@ -1,0 +1,194 @@
+{
+  "main": {
+    "id": "7edb6403eee09867",
+    "type": "split",
+    "children": [
+      {
+        "id": "484df21634ca3d41",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "61e81afb27de6c62",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "backlog/BOARD.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "BOARD"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "d46a5c4f4e6a6c69",
+    "type": "split",
+    "children": [
+      {
+        "id": "864b4c5c9e4c3759",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "32ade65c6bf0e209",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Explorador de arquivos"
+            }
+          },
+          {
+            "id": "39662aa2be95091e",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Procurar"
+            }
+          },
+          {
+            "id": "b7067484f22b21ce",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Marcadores"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "3a80f17e117eee6f",
+    "type": "split",
+    "children": [
+      {
+        "id": "65453d5ecd259f74",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "33e65a6c6b32dbf9",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "backlog/BOARD.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": false
+              },
+              "icon": "links-coming-in",
+              "title": "Links inversos para BOARD"
+            }
+          },
+          {
+            "id": "6c98aa11ae8892a3",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "product/HEADLESS_QA_AND_SAST_GUIDE.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Links de saída para HEADLESS_QA_AND_SAST_GUIDE"
+            }
+          },
+          {
+            "id": "0973ae8cf732e4cf",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Etiquetas"
+            }
+          },
+          {
+            "id": "f1b118275be66fd5",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "Todas as propriedades"
+            }
+          },
+          {
+            "id": "08350b5663771ce4",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "product/HEADLESS_QA_AND_SAST_GUIDE.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Sumário de HEADLESS_QA_AND_SAST_GUIDE"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Abrir a troca rápida": false,
+      "graph:Abrir visualização em gráfico": false,
+      "canvas:Criar novo canvas": false,
+      "daily-notes:Abrir a nota de hoje": false,
+      "templates:Inserir modelo": false,
+      "command-palette:Abrir paleta de comandos": false,
+      "bases:Criar nova base": false
+    }
+  },
+  "active": "61e81afb27de6c62",
+  "lastOpenFiles": [
+    "LESSONS_LEARNED.md",
+    "product/HEADLESS_QA_AND_SAST_GUIDE.md",
+    "product/MCP_VECTOR_DB_GUIDE.md",
+    "product/PROJECT_CONFIG.md",
+    "product/SYSTEM_SPECIFICATION.md",
+    "backlog/BOARD.md"
+  ]
+}

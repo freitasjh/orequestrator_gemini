@@ -1,109 +1,43 @@
-# Guia: Como implementar RAG com MCP, Python e SQLite (Fase 2)
+# Guia: Obsidian como Cérebro Digital (MCP + TypeScript)
 
-Este guia documenta o caminho definitivo para resolver o limite de tokens do Orquestrador: implementar um Servidor MCP (Model Context Protocol) que atua como um Banco de Dados Vetorial semântico local.
+Este projeto utiliza o **Obsidian** como sua base de conhecimento e "cérebro" central. Em vez de um banco de dados vetorial proprietário ou opaco, utilizamos arquivos Markdown locais que podem ser editados tanto por humanos quanto por IAs.
 
-## A Arquitetura Proposta
+## A Arquitetura
 
-Em vez do Gemini CLI ler o `LESSONS_LEARNED.md` inteiro, ele chamará uma ferramenta `search_memory(query="auth jwt")`. O servidor MCP vai calcular o embedding da query, buscar no SQLite os vetores mais próximos (Cosine Similarity) e retornar apenas os 3 parágrafos cruciais.
+Utilizamos um Servidor MCP (Model Context Protocol) desenvolvido em **TypeScript** que atua como uma interface "headless" para o diretório `docs/`.
 
-### 1. O Servidor MCP (Python)
+### Vantagens:
+- **Human-in-the-Loop:** Você pode abrir a pasta `docs/` no Obsidian e organizar o conhecimento visualmente.
+- **Transparência:** Todo o histórico e regras de negócio estão em texto plano (Markdown).
+- **Headless:** O servidor MCP funciona sem a necessidade de o aplicativo Obsidian estar aberto.
 
-Você precisará de um script Python rodando localmente. O protocolo MCP se comunica via `stdio` (entrada/saída padrão) em JSON-RPC.
+## Como Funciona
 
-**Bibliotecas Necessárias:**
-```bash
-pip install mcp sqlite-vss sentence-transformers
-```
+O servidor MCP está localizado em `scripts/tools/obsidian-mcp/` e expõe as seguintes ferramentas para o Orquestrador:
 
-*   `mcp`: O SDK oficial do Anthropic/Google para criar servidores MCP.
-*   `sqlite-vss`: Extensão do SQLite para busca vetorial rápida sem precisar subir um ChromaDB ou Pinecone pesado.
-*   `sentence-transformers`: Para gerar embeddings locais na sua máquina (ex: modelo `all-MiniLM-L6-v2`) de forma rápida e sem custo de API.
+1.  **`list_notes`**: Mapeia todo o conhecimento disponível no Vault.
+2.  **`read_note`**: Lê o conteúdo técnico de uma especificação ou regra.
+3.  **`search_notes`**: Realiza buscas por palavras-chave em toda a documentação.
+4.  **`update_note`**: Permite à IA consolidar aprendizados e atualizar as lições aprendidas (`[[[[[[LESSONS_LEARNED]]]]]].md`).
 
-### 2. Esboço do Código Python (`mcp_memory_server.py`)
+## Configuração do Servidor
 
-```python
-import sqlite3
-import sqlite_vss
-from mcp.server.fastmcp import FastMCP
-from sentence_transformers import SentenceTransformer
-
-# Inicializa o MCP Server
-mcp = FastMCP("SdoMemoryServer")
-
-# Inicializa o modelo de embeddings (Roda localmente, ~80MB)
-model = SentenceTransformer('all-MiniLM-L6-v2')
-
-# Conecta ao SQLite e carrega a extensão VSS
-db = sqlite3.connect('docs/product/memory.sqlite')
-db.enable_load_extension(True)
-sqlite_vss.load(db)
-db.execute("CREATE VIRTUAL TABLE IF NOT EXISTS vss_memory USING vss0(embedding(384))")
-db.execute("CREATE TABLE IF NOT EXISTS memory_text (rowid INTEGER PRIMARY KEY, content TEXT, source TEXT)")
-db.commit()
-
-@mcp.tool()
-def search_memory(query: str) -> str:
-    """Busca o histórico e lições aprendidas do projeto por similaridade semântica."""
-    # Gera o vetor da pergunta
-    query_vector = model.encode(query).tolist()
-    
-    # Busca no SQLite-VSS
-    cursor = db.cursor()
-    cursor.execute("""
-        SELECT t.content, t.source, v.distance 
-        FROM vss_memory v 
-        JOIN memory_text t ON v.rowid = t.rowid
-        WHERE vss_search(v.embedding, ?)
-        ORDER BY v.distance LIMIT 3
-    """, (str(query_vector),))
-    
-    results = cursor.fetchall()
-    
-    if not results:
-        return "Nenhuma informação relevante encontrada na memória."
-        
-    response = "Contexto Recuperado:\n"
-    for content, source, _ in results:
-         response += f"[{source}]: {content}\n---\n"
-         
-    return response
-
-@mcp.tool()
-def add_memory(content: str, source: str) -> str:
-    """Adiciona uma nova lição ou regra ao banco vetorial."""
-    vector = model.encode(content).tolist()
-    cursor = db.cursor()
-    cursor.execute("INSERT INTO memory_text (content, source) VALUES (?, ?)", (content, source))
-    rowid = cursor.lastrowid
-    cursor.execute("INSERT INTO vss_memory(rowid, embedding) VALUES (?, ?)", (rowid, str(vector)))
-    db.commit()
-    return f"Memória adicionada com sucesso (ID: {rowid})."
-
-if __name__ == "__main__":
-    mcp.run()
-```
-
-### 3. Integração com o Gemini CLI
-
-Depois de ter o script Python pronto, você registra o servidor no `settings.json` (ou globalmente no Gemini CLI) na sessão de MCP:
+O servidor é registrado no arquivo `.gemini/settings.json`:
 
 ```json
 {
   "mcp": {
     "servers": {
-      "SdoMemory": {
-        "command": "python3",
-        "args": ["/caminho/absoluto/para/mcp_memory_server.py"]
+      "ObsidianBrain": {
+        "command": "node",
+        "args": ["/caminho/para/scripts/tools/obsidian-mcp/build/index.js"]
       }
     }
   }
 }
 ```
 
-### 4. Como o Pipeline SDD muda com isso?
+## Fluxo de Trabalho (SDO)
 
-*   O arquivo `LESSONS_LEARNED.md` e a pasta `specs/` antigas deixam de existir como texto plano injetado.
-*   Na **Fase 1 (Context-Check)**: O `@context-backend` usaria automaticamente a ferramenta `search_memory("regras de backend")`.
-*   Na **Fase 8 (Consolidação)**: O Orquestrador chamaria a ferramenta `add_memory` enviando o resumo dos erros corrigidos e decisões tomadas naquela Spec, consolidando o aprendizado no banco vetorial.
-
-Dessa forma, o projeto pode ter 10.000 issues e anos de histórico de "Lessons Learned", e o LLM consumirá apenas algumas centenas de tokens cruciais e perfeitos para a task atual.
+- **Fase 1 (Context Check):** O especialista de contexto utiliza `search_notes` para garantir que a nova tarefa não viole decisões arquiteturais anteriores.
+- **Fase 8 (Consolidação):** Após a conclusão de uma tarefa, o Orquestrador utiliza `update_note` para gravar novas lições aprendidas no Vault, garantindo que o sistema "evolua".
