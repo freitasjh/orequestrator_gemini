@@ -1,0 +1,9 @@
+description = "Realize a revisão dos codigos de front-end"
+prompt = """
+Chame o @frontend-code-reviewer e analise as alterações realizadas
+
+```diff
+!{git diff --staged}
+```
+
+"""

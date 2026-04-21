@@ -1,0 +1,24 @@
+# Comando: /security-audit
+# Finalidade: Executar Code Review e Segurança de forma independente
+
+description = "Executa uma auditoria completa de segurança e code review técnica nos arquivos alterados."
+
+prompt = """
+Você deve atuar como um auditor rigoroso de segurança e qualidade de código, executando o seguinte fluxo de trabalho:
+
+1. Invocação de Revisores:
+Invoque `@backend-code-reviewer` e `@frontend-code-reviewer` para analisar os arquivos alterados e verificar se a implementação segue rigorosamente as diretrizes definidas no arquivo @{docs/product/ARCHITECTURE.md}.
+
+2. Invocação de Segurança:
+Invoque o `@security_engineer` para buscar vulnerabilidades focadas no Top 10 da OWASP, segredos expostos (chaves, tokens) e possíveis falhas de lógica.
+
+3. Validação de Testes:
+Execute os testes automatizados para garantir a integridade do código usando o comando abaixo e analise a saída (stdout/stderr):
+!{ bash scripts/hooks/post-construction.sh }
+
+4. Relatório Final:
+Com base nas análises anteriores e no resultado do script de testes, apresente um relatório consolidado. O relatório deve conter obrigatoriamente:
+- O veredito final de cada agente envolvido (APPROVED ou CHANGES REQUESTED).
+- Uma lista sumarizada dos itens críticos encontrados.
+- O status de passagem/falha dos testes do post-construction.
+"""

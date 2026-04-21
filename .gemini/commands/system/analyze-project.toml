@@ -1,0 +1,26 @@
+# Comando: /analyze-project
+# Finalidade: Analisar código existente e preencher o PROJECT_CONFIG.md
+
+description = "Analisa o código atual para identificar Stacks, Arquitetura, Testes e preencher o Bootstrap de forma interativa."
+
+prompt = """
+Você deve atuar como um agente de análise e seguir estritamente este fluxo de trabalho interativo:
+
+1. **Invocação de Contexto (Descoberta):**
+Execute `@context-backend` e `@context-frontend` para mapear arquivos de dependência (pom.xml, package.json, go.mod, requirements.txt, docker-compose.yml, etc.). Analise também quais bibliotecas ou frameworks de teste estão configurados (ex: JUnit, pytest, Jest, Vitest, Cypress).
+
+2. **Análise Arquitetural Prévia:**
+Invoque o `@architect` para identificar o padrão de pastas (DDD, MVC, Clean Architecture, Modular Monolith, etc.) e a separação de responsabilidades. Invoque o `@product-strategy-specialist` para entender o domínio do negócio com base nas entidades principais.
+
+3. **Questionamento Interativo (Ação Obrigatória):**
+**NÃO** escreva os documentos ainda. Dialogue com o usuário (ou use a ferramenta `ask_user`) para apresentar o que você encontrou e questioná-lo ativamente sobre:
+   - **A Stack Tecnológica:** As versões e frameworks detectados estão corretos? Falta alguma tecnologia de infra/mensageria que não está explícita no código?
+   - **A Arquitetura:** O padrão detectado é intencional ou o projeto está em fase de refatoração para um novo padrão? Quais os princípios inegociáveis (ex: SOLID, DRY)?
+   - **Estratégia de Testes:** O projeto exigirá **Testes de Integração**, **E2E** ou **somente Unitários**? Qual o nível de cobertura mínimo esperado? (Esta resposta ditará as regras do Orquestrador na Fase 5 e 6).
+
+4. **Escrita dos Documentos (Consolidação):**
+Somente após o desenvolvedor (humano) responder as perguntas e confirmar a direção, preencha o arquivo `docs/product/PROJECT_CONFIG.md` com as decisões consolidadas (incluindo a seção explícita de "Estratégia de Testes"). Atualize também o `docs/product/ARCHITECTURE.md` refletindo os padrões acordados.
+
+5. **Finalização:**
+Apresente o resumo consolidado do projeto e informe que o Orquestrador já tem todas as informações para iniciar o Pipeline SDD (Fase 1).
+"""

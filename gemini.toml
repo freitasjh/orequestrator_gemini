@@ -1,0 +1,40 @@
+# Configurações do Projeto - Gemini CLI
+
+[project]
+name = "ia-orchestrator"
+
+# Políticas de Segurança e Qualidade (Settings)
+[policies]
+allow_net = false
+allow_fs = true
+allow_exec = true
+
+# Hooks do Sistema (Automáticos)
+[hooks]
+# Bloqueia qualquer edição de código se o Bootstrap não estiver OK
+before_edit = "bash scripts/hooks/pre-spec.sh && bash scripts/hooks/fsm-enforcer.sh"
+
+# Executa o linter após cada alteração (Simulado)
+after_edit = "echo '✅ Linter check passed after edit.'"
+
+# Registro de Erros Automático no LESSONS_LEARNED.md (Simulado)
+on_error = "echo \"[$(date)] Error occurred in phase: $PHASE\" >> docs/LESSONS_LEARNED.md"
+
+[agents]
+# Contexto global mínimo
+[agents.context]
+include_patterns = ["docs/product/PROJECT_CONFIG.md"]
+
+# Contexto exclusivo do Orquestrador
+[agents.orchestrator.context]
+include_patterns = ["GEMINI.md", "docs/backlog/BOARD.md"]
+
+# Contexto dos engenheiros (somente a Spec atual e lições aprendidas)
+[agents.backend-specialist.context]
+# Contexto é obtido dinamicamente via search-knowledge.sh
+
+[agents.frontend-specialist.context]
+# Contexto é obtido dinamicamente via search-knowledge.sh
+
+
+

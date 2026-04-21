@@ -1,0 +1,54 @@
+{
+  "hooks": {
+    "BeforeAgent": [
+      {
+        "matcher": ".*",
+        "hooks": [
+          {
+            "name": "pre-spec-validation",
+            "type": "command",
+            "command": "bash scripts/hooks/pre-spec.sh",
+            "timeout": 5000
+          }
+        ]
+      }
+    ],
+    "AfterTool": [
+      {
+        "matcher": "write_file|replace|run_shell_command",
+        "hooks": [
+          {
+            "name": "post-construction-validation",
+            "type": "command",
+            "command": "bash scripts/hooks/post-construction.sh",
+            "timeout": 30000
+          }
+        ]
+      }
+    ],
+    "BeforeTool": [
+      {
+        "matcher": "write_file|replace",
+        "hooks": [
+          {
+            "name": "fsm-enforcer",
+            "type": "command",
+            "command": "bash scripts/hooks/fsm-enforcer.sh",
+            "timeout": 5000
+          }
+        ]
+      },
+      {
+        "matcher": ".*",
+        "hooks": [
+          {
+            "name": "quality-gate",
+            "type": "command",
+            "command": "bash scripts/hooks/quality-gate.sh",
+            "timeout": 5000
+          }
+        ]
+      }
+    ]
+  }
+}
