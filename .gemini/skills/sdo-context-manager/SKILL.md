@@ -10,11 +10,13 @@ Esta skill é o "Cerebro de Conhecimento" do SDO. Ela evita alucinações e redu
 
 ## Workflow de Context Engineering (Fase 1)
 
-### 1. Descoberta Semântica (via MCP/Vector DB)
-Sempre que uma nova tarefa for iniciada, a skill orienta o uso do MCP para buscas semânticas:
-- **Busca por Funcionalidade:** "Quem mais faz [Funcionalidade X] neste projeto?".
-- **Busca por Padrão:** "Como [Padrão Y] é implementado no código atual?".
-- **Check de Conflito:** "A nova regra proposta conflita com algo no `SYSTEM_SPECIFICATION.md`?".
+### 1. Descoberta Semântica (Obsidian-First)
+Sempre que uma nova tarefa for iniciada, a skill OBRIGA a consulta ao "Cérebro" do projeto (Obsidian) via MCP:
+- **Consulta à Taxonomia:** Leia sempre `docs/TAG_TAXONOMY.md` para identificar quais categorias de tags são relevantes para a tarefa.
+- **Busca por Tags:** Priorize ferramentas que filtrem por tags (ex: `#eng/arch`) para reduzir o ruído.
+- **Busca de Lições Aprendidas:** Execute `mcp_ObsidianBrain_search_notes` com termos da tarefa para identificar erros que já ocorreram ou padrões de sucesso.
+
+**DADO MANDATÓRIO:** A IA não pode avançar para a Fase 2 sem antes listar no Dashboard de Contexto pelo menos 2 lições aprendidas ou ADRs consultados no Obsidian.
 
 ### 2. Mapeamento de Precedentes (Brownfield Analysis)
 Antes de gerar o Blueprint (Fase 2), a skill exige o preenchimento de um `CONTEXT_REPORT.md` temporário:

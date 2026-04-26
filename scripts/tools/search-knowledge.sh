@@ -12,13 +12,14 @@ fi
 echo "🔍 Iniciando Busca de Conhecimento Robusta para '$QUERY'..."
 echo "--------------------------------------------------------------"
 
-# 🧠 1. Busca Semântica (RAG via MCP) - Instrução para o Agente
-echo "🧠 [VETORIAL / RAG (MCP)]"
-echo "INFO: O Orquestrador DEVE agora chamar a ferramenta 'search_memory(query=\"$QUERY\")' para recuperar contextos complexos que o grep não consegue achar."
+# 🧠 1. Busca Robusta (RAG via Obsidian MCP)
+echo "🧠 [VETORIAL / BRAIN (MCP)]"
+echo "INFO: O Orquestrador DEVE agora chamar as ferramentas 'mcp_ObsidianBrain_search_notes' e 'mcp_ObsidianBrain_read_note'."
+echo "DICA: Use 'search_notes' para encontrar referências e 'read_note' para detalhes de ADRs e lições aprendidas."
 echo "--------------------------------------------------------------"
 
-# 📚 2. Busca em Lições Aprendidas
-echo "📚 [LESSONS_LEARNED.md]"
+# 📚 2. Busca Rápida em Lições Aprendidas (Fallback)
+echo "📚 [FALLBACK: LESSONS_LEARNED.md]"
 if [ -f "docs/LESSONS_LEARNED.md" ]; then
   grep -i -C 3 "$QUERY" docs/LESSONS_LEARNED.md || echo "Nenhuma lição encontrada para '$QUERY'."
 else
